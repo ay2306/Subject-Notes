@@ -1,3 +1,7 @@
+<center>
+<h1>Operating System</h1>
+</center>
+
 **Question 1:** What is an operating system?
 
 **Answer:** An operating system is a program that acts as an interface between the user and the computer hardware and controls the execution of all kinds of programs.
@@ -207,17 +211,82 @@ What can happen is that there comes a higher priority process after line 7 of pr
  
  
 
-**Question:**
+**Question 21:** What are monitors?
+
+**Answer:** Monitors are classes which have synchronized functions. They are used in Java.
+Example
+
+```java
+class Account{
+    private int bal;
+    void synchronize deposit(int x){
+        bal=bal+x;
+    }
+    void synchronize credit(int x){
+        bal=bal-x;
+    }
+}
+```
+ 
+
+**Question 22:** What is a deadlock?
+
+**Answer:** Deadlock is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process
+ 
+
+**Question 23:** What are neccessary condition for deadlock?
+
+**Answer:** There are 4 necessary condition for deadlock
+1. **Mutual Exclusion-** If a resource is being used by one process, it cannot be used by another process.
+2. **Hold and Wait-** Processes must be holding and waiting for some resource. If a process is not holding any resource or is not waiting for any resource then it cannot cause deadlock.
+3. **No Preemption-** Operating system cannot take back allocated resources from the process
+4. **Circular Wait-** Wait must be in circular order. Example
+    - A holds P1 and waits for P2
+    - B hold P2 and wait for P1
+    
+    So there is a circular wait A->P2->B->P1->A 
+
+**Question 24:** What are methods of handling deadlock?
+
+**Answer:** There are 4 methods to handle deadlock
+1. **Prevent deadlock-** Do not let all 4 condition to possibly happen
+2. **Avoid deadlock-** Do not grant a request which leads to deadlock
+3. **Detect and Recover-** Detect Deadlock and recover
+4. **Ignore it-** Interestingly it is used in Windows and Unix
+
+**Question 25:** What is spooling?
+
+**Answer:** SPOOL is an acronym for simultaneous peripheral operations on-line.  It is a kind of buffering mechanism or a process in which data is temporarily held to be used and executed by a device, program or the system. Data is sent to and stored in memory or other volatile storage until the program or computer requests it for execution.
+
+In easier words, printer only prints one thing at a time. So what we can do is store future request in buffer and process them one by one. So whenever any processor asks for a printer in working state, it will be available and there is no mutual exclusion property for deadlock. This is called Spooling.
+ 
+**Question 26:** How to prevent deadlock by making counter measures against hold and wait criteria?
+
+**Answer:**
+1. Ask process to declare its usage time (impractical)
+2. Ask process to release all resources before making a new request
+ 
+**Question 27:** Banker's algorithm for avoidance of deadlock and to even detect it.
+
+**Answer:** Must Revise
+ 
+**Question 28:**  
 
 **Answer:**
  
-
-**Question:**
+**Question:** 
 
 **Answer:**
  
+**Question:** 
 
-**Question:**
+**Answer:**
+ 
+**Question:** 
+
+**Answer:**
+ 
+**Question:** 
 
 **Answer:**
  
