@@ -270,23 +270,140 @@ In easier words, printer only prints one thing at a time. So what we can do is s
 
 **Answer:** Must Revise
  
-**Question 28:**  
+**Question 28:** What are expectations from memory?
 
 **Answer:**
+1. Low access time
+2. High Capacity
+3. Low cost to store a bit
  
-**Question:** 
+**Question 29:** What is Relative Address and Physical Address? 
 
 **Answer:**
- 
-**Question:** 
+- **Relative Address-** This address is used as a reference to access the physical memory location by CPU. This is actually distance from some base address. 
+    - Also called virtual address and logical address
+- **Physical Address-** Physical Address identifies a physical location of required data in a memory. The user never directly deals with the physical address but can access by its corresponding logical address.
+- **Memory Management Unit (MMU)-** This is a hardware device which maps logical address of process to actual phyical address. This process is called **address binding**.
+
+**Question 30:** Types of address binding.
 
 **Answer:**
+1. **Compile Time Binding:** For example in 8085, but that is not logical address rather itself a physical address. But if we use emulator then yeah that is the idea behind this.
+2. **Load Time Binding-** Suppose a program is loaded to the memory for the first time. We assign it a base address. Then simply at that time convert all address with reference to base memory.
+    - We cannot move the resources once allocated, so this is a problem
+3. **Run Time Binding-** Here we need MMU. 
  
-**Question:** 
+**Question 31:** What is Fragmentation? 
+
+**Answer:** As processes are loaded and removed from memory, the free memory space is broken into little pieces. It happens after sometimes that processes cannot be allocated to memory blocks considering their small size and memory blocks remains unused. This problem is known as Fragmentation.
+
+- **Internal Fragmentation-** Memory block assigned to process is bigger. Some portion of memory is left unused, as it cannot be used by another process.
+- **External Fragmentation-** Total memory space is enough to satisfy a request or to reside a process in it, but it is not contiguous, so it cannot be used.
+
+**Question 32:** Explain Dynamic Partitioning of memory.
+
+**Answer:** Let's say our memory is divided into small blocks $P_1, P_2,P_3,P_4$ and $P_5$
+
+Let's say all were occupied and then processes occupying $P_2$ and $P_4$ finishes, creating holes. Let's represent them as doubly linked list.
+
+$$P_1 \rightleftharpoons P_2 \rightleftharpoons P_3 \rightleftharpoons P_4 \rightleftharpoons P_5$$
+$$P_1 \rightleftharpoons H \rightleftharpoons P_3 \rightleftharpoons H \rightleftharpoons P_5$$
+
+Now if $P_3$ becomes a hole as well, then we can combine 3 holes as a bigger hole.
+
+$$P_1 \rightleftharpoons H \rightleftharpoons H \rightleftharpoons H \rightleftharpoons P_5$$
+$$P_1 \rightleftharpoons H \rightleftharpoons P_5$$
+
+**Question 33:** Explain First Fit, Best Fit and Next Fit memory Allocation.
+
+**Answer:** As explained, in dynamic memory parition we can use a linked list memory mapping. Now which hole to allocate to which memory depends on the allocation algorithm. There are four allocation algorithms
+1. **First Fit Algorithm-**
+
+```cpp
+node cur = head;
+while(cur && (cur.type == 'allocated' || cur.size() < req))
+    cur = cur->next;
+if(cur == null)throw no memory error;
+Allocate(cur, req)
+```
+2. **Best Fit Algorithm-**
+
+```cpp
+node cur = head, best;
+while(cur)
+    if(cur.type == 'allocated') continue
+    if(cur.size() < req) continue
+    if(best == null || cur.size() < best.size())
+        best = cur;
+    cur = cur->next;
+if(best == null)throw no memory error;
+Allocate(best, req)
+```
+3. **Next Fit Algorithm-**
+
+```cpp
+node finish = cur;
+if(cur.size() >= req)return Allocate(cur,req);
+cur = cur->next;
+while(cur != finish && (cur.type == 'allocated' || cur.size() < req))
+    cur = cur->next;
+    if(cur == null)cur=head
+if(cur == finish)throw no memory error;
+Allocate(cur, req)
+```
+ 
+**Question 34:** Explain paging.
 
 **Answer:**
+- Primary memory is divided into slots of equal sizes called frames
+- Process is divided into slots of equal sizes called pages.
+- Individual pages are loaded into frames, 2 pages might be loaded into continuous frams or non-continuous frames
+- Since CPU generated logical address in contiguous in nature, Static or Load Time Binding is not possible as stated in previous point.
+- MMU have a page table base register pointing to page table of process, which is set during context-switching
  
-**Question:** 
+**Question 35:** What is virtual memory?
+
+**Answer:** Processes are told that they have been allocated memory they are demanding, even if there is unavailability. Instead the pages are stored in secondary memory. Pages are then loaded into frame when demand is there. 
+ 
+**Question 36:** What is page fault?
+
+**Answer:** Suppose pages $P_1$ and $P_2$ are in frames while $P_3$ and $P_4$ are in secondary memory. Suppose there is a demand for memory by $P_1$, then there is no issue as it is already there. But when $P_3$ demands memory then it is called a **page fault** as page has to be loaded from slower secondary memory. Reduces speed average throughput.
+ 
+**Question 37:** What is Translation Lookaside Buffer?
+
+**Answer:** TLB is cache in processor for Page Table. We need to look at page table billions of time. So it is optimal to have it cached.
+
+A translation lookaside buffer is a memory cache that is used to reduce the time taken to access a user memory location. It is a part of the chip's memory-management unit.
+ 
+**Question 38:** What is demand paging?
+
+**Answer:** In a system that uses demand paging, the operating system copies a disk page into physical memory only if an attempt is made to access it and that page is not already in memory.
+ 
+**Question 39:** What is thrashing?
+
+**Answer:** When we increase degree of multiprogramming, then CPU utilization is bound to go better. But this is not the case actually. After sometime, since disk pages needs to be loaded from secondary memory more, hence page faults increases thus increasing IO operation. This leads to slower process and CPU is thus kept at hold. 
+
+![Thrashing Diagram](https://i.ibb.co/R0sCb4c/Thrashing-Diagram.png)
+ 
+**Question 40:** Page Replacement Algorithms.
 
 **Answer:**
+First of all there are two types of place replacements.
+1. **Local Replacement-** Page which is pre-empted from frame belongs to the same process. It is better for single process.
+2. **Global Replacement-** Page which is pre-empted from frame can belong to the any process. It is better for overall system.
+
+Three Page Replacement Algorithms
+1. **First In First Out**
+2. **Optimal-** We find the process which will be used after long time and remove it from frame. This is impractical but optimal.
+3. **Least Recently Used-** Process with oldest timestamp is removed. After use timestamp is updated. (Not actual implementation but idea to understand)
+
+**Question 41:** What is Belady's Anomaly?
+
+**Answer:** We can assume that if we increase number of frames in physical memory then page faults decreases but this may not be true.
+For example: Run this is for 3 and 4 frames in FIFO = $1,2,3,4,1,2,5,1,2,3,4,5$
  
+
+**Question 42:** What are segments?
+
+**Answer:** Segmentation is a memory management technique in which, the memory is divided into the variable size parts. Each part is known as segment which can be allocated to a process. The details about each segment are stored in a table called as segment table.
+  
