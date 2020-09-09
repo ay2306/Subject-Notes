@@ -132,3 +132,68 @@ Tip: If we are starting with scaling, more common methods should be tried first 
     - For example- SELECT
 - **Data Control Language-** Data control commands in SQL allow you to control access to data within the database.
     - For example- ALTER PASSWORD, GRANT, REVOKE 
+
+**Question 18:** What is database indexing?
+
+**Answer:** Indexing is a data structure technique to efficiently retrieve records from the database files based on some attributes on which the indexing has been done. Indexing in database systems is similar to what we see in books.
+- **Clustering Index-** Clustering index is defined on an ordered data file. The data file is ordered on a non-key field.
+- **Prime Index-** Primary index is defined on an ordered data file. The data file is ordered on a key field. The key field is generally the primary key of the relation.
+- **Secondary Index-** Secondary index may be generated from a field which is a candidate key and has a unique value in every record, or a non-key with duplicate values.
+ 
+**Question 19:** What is dense indexing and sparse indexing?
+
+**Answer:** 
+- **Dense Indexing-** In dense index, there is an index record for every search key value in the database. This makes searching faster but requires more space to store index records itself. Index records contain search key value and a pointer to the actual record on the disk.
+- **Sparse Indexing-** In sparse index, index records are not created for every search key. An index record here contains a search key and an actual pointer to the data on the disk. To search a record, we first proceed by index record and reach at the actual location of the data. If the data we are looking for is not where we directly reach by following the index, then the system starts sequential search until the desired data is found.
+
+**Question 20:** What are different states of transaction?
+
+**Answer:** 
+- **Active State-** A transaction enters into an active state when the execution process begins. During this state read or write operations can be performed.
+- **Partially Committed State-** A transaction goes into the partially committed state after the end of a transaction.
+- **Committed State-** When the transaction is committed to state, it has already completed its execution successfully. Moreover, all of its changes are recorded to the database permanently.
+- **Failed State-** A transaction considers failed when any one of the checks fails or if the transaction is aborted while it is in the active state.
+- **Terminated State-** State of transaction reaches terminated state when certain transactions which are leaving the system can't be restarted.
+ 
+**Question 21:** What is dirty read problem?
+
+**Answer:** Consider two transactions where initial $A=10$
+|Step|$T_1$|$T_2$|
+|:--:|:--:|:--:|
+|1|$Read(A)$|$-$|
+|2|$A = A + 1$|$-$|
+|3|$-$|$Read(A)$|
+|4|$-$|$Commit$|
+|5|$Fail$|$-$|
+|6|$Rollback$|$-$|
+Now $A$ after step $2$ is $11$ and $T_2$ reads $A$ from shared buffer, thus reading $11$ and committing that but $T_1$ fails and makes $T_2$ commit inconsistent.
+
+**Question 22:** What is unrepeatable read problem?
+
+**Answer:** Consider two transactions where initial $A=10$
+|Step|$T_1$|$T_2$|
+|:--:|:--:|:--:|
+|1|$Read(A)$|$-$|
+|2|$-$|$Read(A)$|
+|3|$A = A + 1$|$-$|
+|4|$-$|$Read(A)$|
+|5|$-$|$Failure$|
+|6|$Commit$|$-$|
+Notice that $T_2$ while solving a problems reads 2 inconsistent values of $A$ which causes a problem, this is called unrepeatable read problem
+
+**Phantom Read-** If in step 3 instead of update, we delete the variable then this causes phantom read problem.
+
+**Question 23:** What is a schedule? 
+
+**Answer:** A chronological execution sequence of a transaction is called a schedule, for example table in above two answers.
+ 
+**Question 24:** What is Conflict Serializibility?
+
+**Answer:** 
+- **Conflict Serializable:** A schedule is called conflict serializable if it can be transformed into a serial schedule by swapping non-conflicting operations.
+
+- **Conflicting operations:** Two operations are said to be conflicting if all conditions satisfy:
+    - They belong to different transactions
+    - They operate on the same data item
+    - At Least one of them is a write operation
+ 
