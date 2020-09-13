@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button>Click me</button>
+    </div>
+    <script>
+        document.querySelector('button').addEventListener('click',function(event){
+            event.stopImmediatePropagation();    
+            console.log('button');
+        })
+        document.querySelector('button').addEventListener('click',function(event){
+            console.log('button 1');
+        })
+    </script>
+</body>
+</html>
