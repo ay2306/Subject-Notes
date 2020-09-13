@@ -109,3 +109,100 @@ A firewall can be hardware, software, or both.
 - **Step 3 (ACK):** In the final part client acknowledges the response of server and they both establish a reliable connection with which they will start the actual data transfer
 
 ![3-Way handshake](https://i.ibb.co/yXTT6hC/TCP-connection-1.png)
+
+**Question 10:** What is cryptography? 
+
+**Answer:** Cryptography is the science of secret writing with the intention of keeping the data secret. Cryptography can be classified into 2 categories
+- **Encryption-** Encryption is a process that encodes a message or file so that it can be only be read by certain people. Encryption uses an algorithm to scramble, or encrypt, data and then uses a key for the receiving party to unscramble, or decrypt, the information. The message contained in an encrypted message is referred to as plaintext. In its encrypted, unreadable form it is referred to as ciphertext. Encryption is of 2 types
+    - **Symmetric Encryption-** Symmetric-key algorithms are algorithms for cryptography that use the same cryptographic keys for both encryption of plaintext and decryption of ciphertext. The keys may be identical or there may be a simple transformation to go between the two keys.
+        - **Public Key-** This key is given to public and data can be encrypted using this key.
+        - **Private Key-** This key is kept with the receiver and is used for decryption of data.
+    - **Asymmetric Encryption-** Asymmetric Encryption uses two distinct, yet related keys. One key, the Public Key, is used for encryption and the other, the Private Key, is for decryption. As implied in the name, the Private Key is intended to be private so that only the authenticated recipient can decrypt the message.
+- **Hashing-** Hashing is the process of converting a given key into another value. A hash function is used to generate the new value according to a mathematical algorithm. The result of a hash function is known as a hash value or simply, a hash. A good hash function uses a one-way hashing algorithm, or in other words, the hash cannot be converted back into the original key.
+ 
+**Question 11:** Explain classes in IP addressing.
+
+**Answer:** IP addresses are globally managed by **Internet Assigned Numbers Authority(IANA)** and **regional Internet registries(RIR)**
+There are 5 classes of IP addresses
+1. **Class A-** 
+    - 0 (7-bit Network ID) (24 bit Host ID)
+    - $2^7 - 2 = 126$ network ids (0.x.y.x and 127.x.y.z are reserved)
+    - $2^{24} - 2$ host ids (x.0.0.0 is subnet mask and x.255.255.255)
+2. **Class B-** 
+    - 1 0 (14-bit Network ID) (16 bit Host ID)
+    - $2^{14}$ network ids
+    - $2^{16} - 2$ host ids (x.y.0.0 is subnet mask and x.y.255.255)
+3. **Class C-** 
+    - 1 1 0 (21-bit Network ID) (8 bit Host ID)
+    - $2^{21}$ network ids
+    - $2^8 - 2$ host ids (x.y.z.0 is subnet mask and x.y.z.255)
+4. **Class D-** 
+    - 1 1 1 0 (28 bit Host ID)
+    - IP address belonging to class D are reserved for multi-casting. The higher order bits of the first octet of IP addresses belonging to class D are always set to 1110. The remaining bits are for the address that interested hosts recognize.
+5. **Class E-** 
+    - 1 1 1 1 (28 bit Host ID)
+    - Reserved special IP addresses
+
+**Question 12:** What is classless IP addressing?
+
+**Answer:** To reduce the wastage of IP addresses in a block, we use sub-netting. What we do is that we use host id bits as net id bits of a classful IP address. We give the IP address and define the number of bits for mask along with it (usually followed by a ‘/’ symbol), like, 192.168.1.1/28. Here, subnet mask is found by putting the given number of bits out of 32 as 1, like, in the given address, we need to put 28 out of 32 bits as 1 and the rest as 0, and so, the subnet mask would be 255.255.255.240.
+
+**Question 13:** Explain domain name system.
+
+**Answer:** DNS is a hostname to IP address translation service. DNS is a distributed database implemented in a hierarchy of name servers. It is an application layer protocol for message exchange between clients and servers.
+
+1. **Root name servers–** It is contacted by name servers that can not resolve the name. It contacts authoritative name server if name mapping is not known. It then gets the mapping and return the IP address to the host.
+2. **Top level server–** It is responsible for com, org, edu etc and all top level country domains like uk, fr, ca, in etc. They have info about authoritative domain servers and know names and IP addresses of each authoritative name server for the second level domains.
+3. **Authoritative name servers-** This is organization’s DNS server, providing authoritative hostName to IP mapping for organization servers. It can be maintained by organization or service provider. In order to reach cse.dtu.in we have to ask the root DNS server, then it will point out to the top level domain server and then to authoritative domain name server which actually contains the IP address. So the authoritative domain server will return the associative ip address.
+![DNS](https://i.ibb.co/cxNy0vS/dns.png)
+
+**Question 14:** Explain SMTP server. 
+
+**Answer:** SMTP stands for Simple Mail Transfer Protocol. SMTP is a push protocol and is used to send the mail whereas **POP (post office protocol)** or **IMAP (internet message access protocol)** are used to retrieve those emails at the receiver’s side.
+
+The client who wants to send the mail opens a TCP connection to the SMTP server and then sends the mail across the connection. The SMTP server is the always-on listening mode. As soon as it listens for a TCP connection from any client, the SMTP process initiates a connection on that port (25). After successfully establishing the TCP connection the client process sends the mail instantly.
+
+ 
+**Question 15:** What is port number? 
+
+**Answer:** A port is basically a physical docking point which is basically used to connect the external devices to the computer or we can say that A port act as an interface between computer and the external devices, e.g., we can hard drives, printers to the computer with the help of ports.
+ 
+**Question 16:** What is the difference between hub, switch and router? 
+
+**Answer:**
+1. **Hub-** When a data packet comes to one of the port, then hub rebroadcasts data to all other
+2. **Switch-** Switch can store MAC address of the devices and then ship the data as per MAC requirment
+3. **Router-** Router checks the logical address and if selects the IP to send data to and send this information to switch to make it physically transfer data.
+ 
+**Question 17:** What is TCP and UDP? 
+
+**Answer:** 
+|TCP|UDP|
+|:--:|:--:|
+|TCP stands for Transmission Control Protocol|UDP is stands for User Datagram Protocol |
+|Once the connection is setup, data can be sent bi-directional i.e. TCP is a connection oriented protocol|UDP is connectionless, simple protocol. Using UDP, messages are sent as packets|
+|The speed of TCP is slower than UDP|UDP is faster compared to TCP|
+|TCP is used for the application where time is not critical part of data transmission|UDP is suitable for the applications which require fast transmission of data and time is crucial in this case.|
+|TCP tracks the data sent to ensure no data loss during data transmission|UDP does not ensure whether receiver receives packets are not. If packets are misses then they are just lost|
+
+**Question 18:** What is domain and workgroup? 
+
+**Answer:** 
+- **Domain** is a client/server network where user can login from any device of the office. Also known as Remote login. It has a centralized administration and all devices can be managed from a centralized device. It prefers a centralized storage and all the users data is stored at a centralized storage device which can be NAS or SAN.
+- **Workgroup** is a peer to peer windows computer network, where users can use his login credentials only on his or her system and not others. It holds an distributed administration wherein each user can manage his machine independently. Most storage is distributed. Each device has its own dedicated storage.
+
+**Question 19:** What are proxy servers. 
+
+**Answer:** Proxy server refers to a server that acts as an intermediary between the request made by clients, and a particular server for some services or requests for some resources. 
+
+**Question 20:** What is DHCP server? 
+
+**Answer:** DHCP server stands for Dynamic Host Configuration Server. 
+
+DHCP is a service. It allows devices to acquire their IP configuration dynamically. It is defined in RFC 2131 and 2939. It works in the server/clients model. The server offers and delivers IP configuration. Clients request and acquire an IP configuration.
+
+When a host (DHCP client) needs an IP configuration, it connects to a DHCP server and requests for an IP configuration. DHCP server contains several pre-configured IP configurations. DHCP server, upon receiving a request from the DHCP client, offers an IP configuration from all available IP configurations.
+
+This entire process goes through the four steps: Discover, Offer, Request, and Acknowledgment. The following image shows these steps
+
+![DHCP Server](https://i.ibb.co/JszKyYd/dhcp.png)
