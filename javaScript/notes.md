@@ -33,7 +33,9 @@ OUTPUT
 }
 */
 ```
- 
+
+**Note:** Arrow functions do not have arguments object.
+
 **Question 3:** How to get type of a variable in javascript?
 
 **Answer:** Use typeof
