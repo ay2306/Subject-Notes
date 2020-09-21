@@ -336,3 +336,6 @@ Lets consider the flow of a program:
 
 **Demultiplexer** is a notification interface that is used to handle concurrency in non-blocking I/O operations. The demultiplexer provides an **Event Queue** and thus when an handler is recieved by the demultiplexer it returns the control to the program. There is an **Event Loop** which iterates over the **Event Queue** triggering the handler(callback in case of JavaScript). When all items in **Event Queue** are processed and no pending operations are left, Node.js terminates the application.
 
+
+
+More Node.js questions [here](https://www.edureka.co/blog/interview-questions/top-node-js-interview-questions-2016/).
