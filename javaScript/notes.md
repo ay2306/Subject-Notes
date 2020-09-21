@@ -330,3 +330,9 @@ Lets consider the flow of a program:
 
 **Note:** The reason some times compiling JS doesn't give error in unused functions is due to the concept of lazy loading, i.e. engine (especially V8 uses this optimisation) partially parses functions before there first use and can miss some info error in them. These partailly parsed functions are parsed completely on first call and then is when any error missed during partial parsing will come up. (Read more about it [here](https://www.mattzeunert.com/2017/01/30/lazy-javascript-parsing-in-v8.html)).
 
+**Question 15:** What is Reactor Pattern in Node.JS?
+
+**Answer:** Reactor pattern is an idea of non-blocking I/O operations in Node.js. It provides a handler for each I/O operation and when an I/O request is generated, handler assosiated with it is submitted to demultiplexer. 
+
+**Demultiplexer** is a notification interface that is used to handle concurrency in non-blocking I/O operations. The demultiplexer provides an **Event Queue** and thus when an handler is recieved by the demultiplexer it returns the control to the program. There is an **Event Loop** which iterates over the **Event Queue** triggering the handler(callback in case of JavaScript). When all items in **Event Queue** are processed and no pending operations are left, Node.js terminates the application.
+
