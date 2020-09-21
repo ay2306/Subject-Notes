@@ -319,3 +319,11 @@ Output:
 **Answer:** ParseInt converts string to integer
 - Prototype: `parseInt(str,base)`
  
+ **Question 15:** Is JavaScript compiled or Interpreted?
+ 
+ **Answer:** JavaScript being a fairly mordern language falls in between the two steps hence confusion regarding compiled or Interpreted.
+Lets consider the flow of a program:
+1. Source code is transpiled (Babel) and packaged (Webpack).
+2. JS engine(V8 in chrome, SpiderMnokey in firefox, JavaScriptCore in Safari, Chakra in Internet Explorer) converts the packaged code to Abstract Syntax Tree(AST).
+3. JS engine then converts AST to "Kind of byte code" which is used by JIT compiler
+4. JS Virtual Machine executes the program.
