@@ -327,3 +327,6 @@ Lets consider the flow of a program:
 2. JS engine(V8 in chrome, SpiderMnokey in firefox, JavaScriptCore in Safari, Chakra in Internet Explorer) converts the packaged code to Abstract Syntax Tree(AST).
 3. JS engine then converts AST to "Kind of byte code" which is used by JIT compiler
 4. JS Virtual Machine executes the program.
+
+**Note:** The reason some times compiling JS doesn't give error in unused functions is due to the concept of lazy loading, i.e. engine (especially V8 uses this optimisation) partially parses functions before there first use and can miss some info error in them. These partailly parsed functions are parsed completely on first call and then is when any error missed during partial parsing will come up. (Read more about it [here](https://www.mattzeunert.com/2017/01/30/lazy-javascript-parsing-in-v8.html)).
+
